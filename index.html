@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#101522">
+<title>SUPER PORTAL — O‘zingni sinab ko‘r!</title>
+<style>
+:root{--bg:#0b1020;--panel:#141c31;--text:#f4f7ff;--muted:#a8b4ce;--line:#2a3858;--a:#7c5cff;--b:#22d3b6;--pink:#ff668e}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,"Segoe UI",Arial,sans-serif}
+body{min-height:100vh;background:radial-gradient(ellipse at 10% 0%,#25205a 0,transparent 38%),radial-gradient(ellipse at 100% 30%,#123d4b 0,transparent 30%),var(--bg);color:var(--text);line-height:1.5}
+header{padding:44px 18px 34px;text-align:center;border-bottom:1px solid #ffffff14}.pill{display:inline-block;padding:6px 12px;border:1px solid #ffffff24;background:#ffffff0c;border-radius:99px;color:#c6c1ff;font-size:.78rem;letter-spacing:1.5px;font-weight:800}
+h1{font-size:clamp(2rem,7vw,4rem);line-height:1.08;margin:16px 0 12px;letter-spacing:-1.5px}.gradient{background:linear-gradient(90deg,#a99aff,#5df3d4,#ff8bb0);-webkit-background-clip:text;background-clip:text;color:transparent}header p{max-width:650px;margin:auto;color:var(--muted)}
+.wrap{max-width:1150px;margin:26px auto;padding:0 15px 30px}.toolbar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:18px}.search{flex:1;min-width:190px}
+input,textarea,select{width:100%;background:#0d1426;color:var(--text);border:1px solid var(--line);padding:12px 13px;border-radius:12px;outline:none;font-size:1rem}input:focus,textarea:focus,select:focus{border-color:var(--b);box-shadow:0 0 0 3px #22d3b619}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:16px}.card{background:linear-gradient(150deg,#19243bd9,#11192bdc);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 15px 45px #00000020;display:flex;flex-direction:column;gap:13px;min-width:0;transition:transform .2s,border-color .2s}.card:hover{transform:translateY(-3px);border-color:#53658e}
+.card-head{display:flex;align-items:center;gap:12px}.ico{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#7c5cff33,#22d3b622);font-size:1.45rem;flex-shrink:0}h2{font-size:1.08rem;line-height:1.25}.sub{color:var(--muted);font-size:.88rem}
+.btn{border:0;border-radius:12px;padding:12px 15px;color:#08111c;background:linear-gradient(100deg,var(--b),#8bf1d6);font-weight:800;font-size:.94rem;cursor:pointer;transition:filter .2s,transform .2s}.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}.btn.alt{color:var(--text);background:#263452;border:1px solid #3b4b70}.btn.purple{color:white;background:linear-gradient(100deg,var(--a),#ad72ff)}.btn.pink{color:white;background:linear-gradient(100deg,#ef477d,#ff8a78)}
+.actions{display:flex;gap:9px;flex-wrap:wrap}.actions .btn{flex:1}.result{padding:13px;border-radius:13px;background:#0a1223;border:1px solid #293653;color:#dce6ff;min-height:48px;overflow-wrap:anywhere}.result strong{color:var(--b)}
+.statrow{display:flex;gap:8px;flex-wrap:wrap}.stat{flex:1;min-width:85px;padding:12px;border:1px solid var(--line);background:#ffffff06;border-radius:13px;text-align:center}.stat b{font-size:1.3rem;display:block;color:var(--b)}.stat span{font-size:.78rem;color:var(--muted)}
+textarea{resize:vertical;min-height:88px}.notice{font-size:.8rem;color:#8290aa}.progress{height:8px;background:#293653;border-radius:20px;overflow:hidden}.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--a),var(--b));transition:width .3s}
+footer{text-align:center;color:#8390aa;padding:26px 15px 35px;border-top:1px solid #ffffff12;font-size:.85rem}
+@media(max-width:480px){header{padding:35px 15px 27px}.card{padding:17px;border-radius:17px}.wrap{margin-top:18px}.toolbar{align-items:stretch}}
+</style>
+<style>
+#authGate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:18px;background:radial-gradient(ellipse at 15% 10%,#25205a,transparent 42%),radial-gradient(ellipse at 90% 90%,#123d4b,transparent 40%),#080d19;overflow:auto}
+.auth-card{width:min(100%,430px);padding:26px;border:1px solid #344263;border-radius:24px;background:linear-gradient(150deg,#19243bf5,#101729f7);box-shadow:0 24px 90px #0009}
+.auth-brand{text-align:center;margin-bottom:22px}.auth-logo{font-size:2.7rem}.auth-brand h2{font-size:1.7rem;margin:8px 0}.auth-brand p{color:#a8b4ce;font-size:.9rem}
+.auth-tabs{display:flex;gap:8px;margin-bottom:17px}.auth-tabs button{flex:1;border:1px solid #344263;border-radius:11px;padding:10px;background:#0d1426;color:#a8b4ce;font-weight:800;cursor:pointer}.auth-tabs button.active{background:#7c5cff35;color:white;border-color:#7c5cff}
+.auth-form{display:flex;flex-direction:column;gap:11px}.auth-form label{font-size:.83rem;color:#bdc8df}.auth-form input{margin-top:5px}.auth-message{min-height:22px;color:#ff9db4;font-size:.85rem}.auth-note{font-size:.76rem;color:#8390aa;margin-top:13px;line-height:1.5}.auth-userbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px;padding:12px 14px;border:1px solid #2a3858;background:#ffffff08;border-radius:14px}.auth-userbar span{color:#a8b4ce;flex:1}.auth-userbar strong{color:#22d3b6}.auth-userbar button{padding:8px 11px}
+body.auth-locked{overflow:hidden}
+</style>
+
+</head><body class="auth-locked">
+
+<div id="authGate">
+  <div class="auth-card">
+    <div class="auth-brand"><div class="auth-logo">🚀</div><h2><span class="gradient">SUPER PORTAL</span></h2><p>Shaxsiy profilingizga kiring yoki yangi hisob yarating.</p></div>
+    <div class="auth-tabs"><button id="tabLogin" class="active" type="button" onclick="showAuthTab('login')">Kirish</button><button id="tabRegister" type="button" onclick="showAuthTab('register')">Ro‘yxatdan o‘tish</button></div>
+    <form id="loginForm" class="auth-form" onsubmit="handleLogin(event)">
+      <label>Login<input id="loginUsername" autocomplete="username" minlength="3" maxlength="24" required placeholder="Loginingiz"></label>
+      <label>Parol<input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Parolingiz"></label>
+      <button class="btn purple" type="submit">🔐 Hisobga kirish</button>
+    </form>
+    <form id="registerForm" class="auth-form" style="display:none" onsubmit="handleRegister(event)">
+      <label>Yangi login<input id="registerUsername" autocomplete="username" minlength="3" maxlength="24" required pattern="[A-Za-z0-9_]+" placeholder="Masalan: mening_loginim"></label>
+      <label>Yangi parol<input id="registerPassword" type="password" autocomplete="new-password" minlength="8" required placeholder="Kamida 8 ta belgi"></label>
+      <label>Parolni takrorlang<input id="registerPassword2" type="password" autocomplete="new-password" minlength="8" required placeholder="Parolni qayta kiriting"></label>
+      <button class="btn" type="submit">✨ Hisob yaratish</button>
+    </form>
+    <p id="authMessage" class="auth-message" role="status" aria-live="polite"></p>
+    <p class="auth-note">Eslatma: ushbu demo hisoblar shu brauzer va qurilmada saqlanadi. Sayt ommaga ochilsa ham, bu serverli himoya emas; haqiqiy xavfsiz hisoblar uchun server va ma’lumotlar bazasi kerak.</p>
+  </div>
+</div>
+
+<header><span class="pill">✦ BARCHASI BIR JOYDA</span><h1><span class="gradient">SUPER PORTAL</span></h1><p>Matnni tahlil qil, tasodifiy tanlov qil, bilimni sinab ko‘r va kuningga motivatsiya qo‘sh. Bitta saytda — bir nechta foydali vosita!</p></header>
+<main class="wrap">
+<div class="auth-userbar"><span>👤 Kirilgan hisob: <strong id="activeUsername">—</strong></span><button class="btn alt" onclick="logout()">Chiqish</button></div>
+<div class="toolbar"><input class="search" id="searchTools" placeholder="🔎 Vositalardan qidirish..." oninput="filterCards()" aria-label="Vositalardan qidirish"><button class="btn alt" onclick="resetAll()">↻ Tozalash</button></div>
+<div class="statrow" style="margin-bottom:18px"><div class="stat"><b id="toolCount">6</b><span>Foydali vosita</span></div><div class="stat"><b id="wordCountTop">0</b><span>Matndagi so‘zlar</span></div><div class="stat"><b id="quizScore">0</b><span>Viktorina ochkolari</span></div></div>
+<section class="grid" id="toolGrid">
+<article class="card" data-tags="matn sanash harf so‘z bezash katta kichik"><div class="card-head"><div class="ico">📝</div><div><h2>Matn laboratoriyasi</h2><p class="sub">So‘z va belgilarni sanash</p></div></div><textarea id="mainText" placeholder="Matningizni shu yerga yozing..." oninput="analyzeText()"></textarea><div class="statrow"><div class="stat"><b id="words">0</b><span>So‘z</span></div><div class="stat"><b id="chars">0</b><span>Belgi</span></div><div class="stat"><b id="charsNoSpace">0</b><span>Bo‘shliqsiz</span></div></div><div class="actions"><button class="btn purple" onclick="changeCase('upper')">KATTA HARF</button><button class="btn alt" onclick="changeCase('lower')">kichik harf</button></div><button class="btn alt" onclick="copyText()">📋 Matnni nusxalash</button><p class="notice" id="copyStatus" aria-live="polite"></p></article>
+<article class="card" data-tags="random tasodifiy tanlov omad variant qaror"><div class="card-head"><div class="ico">🎲</div><div><h2>Random tanlov</h2><p class="sub">Qaror qilishni osonlashtir</p></div></div><p class="sub">Variantlarni vergul, nuqtali vergul yoki yangi qator bilan ajrating.</p><textarea id="randomInput" placeholder="Masalan: Kitob o‘qish, Sport, Dam olish"></textarea><div class="result" id="randomOutput" aria-live="polite">Tanlangan variant shu yerda chiqadi.</div><button class="btn" onclick="makeRandomChoice()">🎯 Tanlab ber</button></article>
+<article class="card" data-tags="viktorina quiz bilim savol javob texnologiya"><div class="card-head"><div class="ico">🧠</div><div><h2>Bilim sinovi</h2><p class="sub">Savollarga javob berib ochko yig‘</p></div></div><div class="progress"><div id="quizProgress"></div></div><p id="quizQuestion" style="font-weight:750;font-size:1.02rem">1/5 — Dunyodagi mashhur qidiruv tizimlaridan biri qaysi?</p><input id="quizAnswer" placeholder="Javobingiz..." onkeydown="if(event.key==='Enter')checkQuiz()"><div class="result" id="quizFeedback" aria-live="polite">Tayyormisiz? Javobingizni yozing.</div><div class="actions"><button class="btn purple" id="quizBtn" onclick="checkQuiz()">Javobni tekshirish</button><button class="btn alt" onclick="restartQuiz()">Qayta</button></div></article>
+<article class="card" data-tags="kayfiyat motivatsiya maslahat ilhom kun"><div class="card-head"><div class="ico">✨</div><div><h2>Kayfiyat generatori</h2><p class="sub">Kuningiz uchun ilhom</p></div></div><div class="result" id="moodOutput" style="font-size:1.03rem">“Katta natijalar kichik qadamlar bilan boshlanadi.”</div><button class="btn pink" onclick="getMood()">💫 Yangi maslahat</button></article>
+<article class="card" data-tags="maqsad reja vazifa timer vaqt pomodoro diqqat"><div class="card-head"><div class="ico">⏳</div><div><h2>Diqqat taymeri</h2><p class="sub">25 daqiqalik fokus vaqti</p></div></div><div class="result" style="text-align:center"><b id="timerDisplay" style="font-size:2.5rem;letter-spacing:2px">25:00</b><p class="sub" id="timerStatus">Ishga tayyorlaning</p></div><div class="actions"><button class="btn" id="timerStart" onclick="toggleTimer()">▶ Boshlash</button><button class="btn alt" onclick="resetTimer()">↻ Qayta</button></div><p class="notice">25 daqiqa ishlang, keyin qisqa tanaffus qiling. Taymer sahifa ochiq turganida ishlaydi.</p></article>
+<article class="card" data-tags="hisob kalkulyator matematika foiz qo‘shish ayirish"><div class="card-head"><div class="ico">🧮</div><div><h2>Tezkor kalkulyator</h2><p class="sub">Oddiy hisob-kitoblar</p></div></div><input id="numA" type="number" inputmode="decimal" placeholder="Birinchi son"><select id="operation" aria-label="Amal"><option value="+">Qo‘shish (+)</option><option value="-">Ayirish (−)</option><option value="*">Ko‘paytirish (×)</option><option value="/">Bo‘lish (÷)</option><option value="%">Foiz: A sonining B foizi</option></select><input id="numB" type="number" inputmode="decimal" placeholder="Ikkinchi son"><div class="result" id="calcOutput" aria-live="polite">Natija shu yerda chiqadi.</div><button class="btn" onclick="calculate()">= Hisoblash</button></article>
+</section></main><footer>🚀 SUPER PORTAL <span style="color:#475575">|</span> 2026 · Foydali vositalar bir joyda</footer>
+<script>
+
+const AUTH_USERS_KEY='superPortalUsers_v1';
+const AUTH_SESSION_KEY='superPortalActiveUser_v1';
+const OWNER_USERNAME='azimjonov';
+const OWNER_PASSWORD_HASH='e553b71ff15e1a958ec5fdcc0a0c9c12c97ae2b3d0e3cc82041cb88047ebe36f';
+function normalizeUser(s){return s.trim().toLowerCase()}
+async function hashPassword(password){
+  const data=new TextEncoder().encode(password);
+  if(window.crypto && crypto.subtle){
+    const digest=await crypto.subtle.digest('SHA-256',data);
+    return Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  }
+  // Compatibility fallback for browsers opening a local HTML file; this is not a secure password hash.
+  let h=2166136261; for(let i=0;i<password.length;i++){h^=password.charCodeAt(i);h=Math.imul(h,16777619)}
+  return 'fallback-'+(h>>>0).toString(16);
+}
+function readUsers(){try{return JSON.parse(localStorage.getItem(AUTH_USERS_KEY)||'{}')}catch(e){return {}}}
+function authMessage(msg,ok=false){const el=document.getElementById('authMessage');el.textContent=msg;el.style.color=ok?'#6ff0c8':'#ff9db4'}
+function showAuthTab(tab){
+  const login=tab==='login';
+  document.getElementById('loginForm').style.display=login?'flex':'none';
+  document.getElementById('registerForm').style.display=login?'none':'flex';
+  document.getElementById('tabLogin').classList.toggle('active',login);
+  document.getElementById('tabRegister').classList.toggle('active',!login);
+  authMessage('');
+}
+function enterPortal(username){
+  localStorage.setItem(AUTH_SESSION_KEY,username);
+  document.getElementById('activeUsername').textContent=username;
+  document.getElementById('authGate').style.display='none';
+  document.body.classList.remove('auth-locked');
+}
+function leavePortal(){
+  document.getElementById('authGate').style.display='flex';
+  document.body.classList.add('auth-locked');
+}
+async function handleLogin(event){
+  event.preventDefault();
+  const username=normalizeUser(document.getElementById('loginUsername').value);
+  const password=document.getElementById('loginPassword').value;
+  if(username===OWNER_USERNAME){
+    const h=await hashPassword(password);
+    if(h===OWNER_PASSWORD_HASH){authMessage('Xush kelibsiz!',true);enterPortal(OWNER_USERNAME);return}
+  }
+  const users=readUsers(), user=users[username];
+  if(user && user.passwordHash===await hashPassword(password)){
+    authMessage('Muvaffaqiyatli kirdingiz!',true);enterPortal(username);
+  }else authMessage('Login yoki parol xato. Qayta tekshiring yoki yangi hisob yarating.');
+}
+async function handleRegister(event){
+  event.preventDefault();
+  const username=normalizeUser(document.getElementById('registerUsername').value);
+  const password=document.getElementById('registerPassword').value;
+  const password2=document.getElementById('registerPassword2').value;
+  if(username.length<3){authMessage('Login kamida 3 ta belgidan iborat bo‘lsin.');return}
+  if(username===OWNER_USERNAME){authMessage('Bu login band. Boshqa login tanlang.');return}
+  if(password.length<8){authMessage('Xavfsizlik uchun kamida 8 belgili parol tanlang.');return}
+  if(password!==password2){authMessage('Kiritilgan parollar bir xil emas.');return}
+  const users=readUsers();
+  if(users[username]){authMessage('Bu login allaqachon mavjud. Boshqasini tanlang.');return}
+  users[username]={passwordHash:await hashPassword(password),createdAt:new Date().toISOString()};
+  try{localStorage.setItem(AUTH_USERS_KEY,JSON.stringify(users));authMessage('Hisob yaratildi! Saytga kiritilyapsiz.',true);enterPortal(username)}
+  catch(e){authMessage('Hisobni saqlab bo‘lmadi. Brauzer xotirasi sozlamalarini tekshiring.')}
+}
+function logout(){localStorage.removeItem(AUTH_SESSION_KEY);document.getElementById('loginPassword').value='';leavePortal();showAuthTab('login');authMessage('Hisobdan chiqdingiz.',true)}
+(function restoreSession(){
+  const username=localStorage.getItem(AUTH_SESSION_KEY);
+  if(username){enterPortal(username)}else{leavePortal()}
+})();
+
+
+function analyzeText(){const t=document.getElementById('mainText').value,trimmed=t.trim(),words=trimmed?trimmed.split(/\s+/u).length:0;document.getElementById('words').textContent=words;document.getElementById('wordCountTop').textContent=words;document.getElementById('chars').textContent=t.length;document.getElementById('charsNoSpace').textContent=t.replace(/\s/g,'').length}
+function changeCase(type){const el=document.getElementById('mainText');el.value=type==='upper'?el.value.toLocaleUpperCase('uz-UZ'):el.value.toLocaleLowerCase('uz-UZ');analyzeText()}
+async function copyText(){const t=document.getElementById('mainText').value,status=document.getElementById('copyStatus');if(!t){status.textContent='Avval matn kiriting.';return}try{await navigator.clipboard.writeText(t);status.textContent='Matn nusxalandi!'}catch(e){document.getElementById('mainText').select();status.textContent='Matn belgilandi — nusxalash tugmasidan foydalaning.'}}
+function escapeHTML(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function makeRandomChoice(){const arr=document.getElementById('randomInput').value.split(/[,;\n]/).map(x=>x.trim()).filter(Boolean);document.getElementById('randomOutput').innerHTML=arr.length?'<strong>🎉 Tanlandi:</strong> '+escapeHTML(arr[Math.floor(Math.random()*arr.length)]):'Iltimos, kamida bitta variant kiriting.'}
+const questions=[{q:'Dunyodagi mashhur qidiruv tizimlaridan biri qaysi?',a:['google'],hint:'G harfi bilan boshlanadi.'},{q:'HTTP ning xavfsiz versiyasi qanday ataladi?',a:['https'],hint:'HTTP ga S harfi qo‘shiladi.'},{q:'Kompyuterning “miyasi” deb qaysi qism ataladi?',a:['protsessor','processor','cpu'],hint:'CPU deb ham ataladi.'},{q:'Bir baytda necha bit bor?',a:['8','sakkiz'],hint:'2 ning uchinchi darajasi.'},{q:'HTML asosan nima uchun ishlatiladi?',a:['veb sahifa','veb-sahifa','web page','web sahifa','sayt','webpage','veb-sayt','veb sahifalar'],hint:'Brauzerda ko‘rinadigan sahifaning tuzilishi.'}];let qi=0,score=0,answered=false;
+function renderQuiz(){document.getElementById('quizQuestion').textContent=(qi+1)+'/'+questions.length+' — '+questions[qi].q;document.getElementById('quizAnswer').value='';document.getElementById('quizFeedback').textContent='Javobingizni yozing.';document.getElementById('quizProgress').style.width=(qi/questions.length*100)+'%';document.getElementById('quizBtn').textContent='Javobni tekshirish';answered=false}
+function checkQuiz(){if(answered){if(qi<questions.length-1){qi++;renderQuiz()}else{restartQuiz()}return}const ans=document.getElementById('quizAnswer').value.trim().toLocaleLowerCase('uz-UZ'),fb=document.getElementById('quizFeedback');if(!ans){fb.textContent='Avval javob yozing.';return}if(questions[qi].a.some(a=>ans===a||ans.includes(a))){score++;document.getElementById('quizScore').textContent=score;fb.textContent='✅ To‘g‘ri! Barakalla!';fb.style.borderColor='#22d3b6'}else{fb.textContent='💡 Hozircha xato. Maslahat: '+questions[qi].hint;fb.style.borderColor='#ff668e'}answered=true;document.getElementById('quizProgress').style.width=((qi+1)/questions.length*100)+'%';document.getElementById('quizBtn').textContent=qi<questions.length-1?'Keyingi savol →':'Yakunlash'}
+function restartQuiz(){qi=0;score=0;document.getElementById('quizScore').textContent='0';renderQuiz()}
+const moods=['“Bugun yangi bir narsa o‘rganish uchun ajoyib imkoniyat!”','“Kichik qadam ham seni maqsadingga yaqinlashtiradi.”','“Xato — o‘rganish jarayonining bir qismi.”','“Bugun kechagidan bir oz ko‘proq narsani bilib ol.”','“Reja tuz, boshlashdan qo‘rqma, davom et!”','“O‘zingga vaqt ajratish ham samaradorlikning bir qismi.”'];let lastMood=-1;
+function getMood(){let n;do{n=Math.floor(Math.random()*moods.length)}while(n===lastMood&&moods.length>1);lastMood=n;document.getElementById('moodOutput').textContent=moods[n]}
+function calculate(){const at=document.getElementById('numA').value,bt=document.getElementById('numB').value,out=document.getElementById('calcOutput');if(at===''||bt===''){out.textContent='Ikkala sonni ham kiriting.';return}const a=Number(at),b=Number(bt),op=document.getElementById('operation').value;let r;if(op==='+')r=a+b;else if(op==='-')r=a-b;else if(op==='*')r=a*b;else if(op==='/'){if(b===0){out.textContent='Nolga bo‘lish mumkin emas.';return}r=a/b}else r=a*b/100;out.textContent='Natija: '+(Number.isFinite(r)?Number(r.toFixed(8)).toLocaleString('uz-UZ'):r)}
+let timerSeconds=1500,timerInterval=null;function showTimer(){document.getElementById('timerDisplay').textContent=String(Math.floor(timerSeconds/60)).padStart(2,'0')+':'+String(timerSeconds%60).padStart(2,'0')}
+function toggleTimer(){const btn=document.getElementById('timerStart');if(timerInterval){clearInterval(timerInterval);timerInterval=null;btn.textContent='▶ Davom ettirish';document.getElementById('timerStatus').textContent='Taymer pauzada';return}if(timerSeconds<=0)return;btn.textContent='Ⅱ Pauza';document.getElementById('timerStatus').textContent='Diqqat bilan ishlang!';timerInterval=setInterval(()=>{timerSeconds--;showTimer();if(timerSeconds<=0){clearInterval(timerInterval);timerInterval=null;btn.textContent='▶ Boshlash';document.getElementById('timerStatus').textContent='Vaqt tugadi! Qisqa tanaffus qiling.';alert('25 daqiqa tugadi! Qisqa tanaffus qiling.')}},1000)}
+function resetTimer(){if(timerInterval)clearInterval(timerInterval);timerInterval=null;timerSeconds=1500;showTimer();document.getElementById('timerStart').textContent='▶ Boshlash';document.getElementById('timerStatus').textContent='Ishga tayyorlaning'}
+function filterCards(){const q=document.getElementById('searchTools').value.toLocaleLowerCase('uz-UZ');let n=0;document.querySelectorAll('.card').forEach(c=>{const yes=(c.innerText+' '+c.dataset.tags).toLocaleLowerCase('uz-UZ').includes(q);c.style.display=yes?'flex':'none';if(yes)n++});document.getElementById('toolCount').textContent=n}
+function resetAll(){document.getElementById('mainText').value='';document.getElementById('randomInput').value='';document.getElementById('searchTools').value='';document.getElementById('numA').value='';document.getElementById('numB').value='';document.getElementById('calcOutput').textContent='Natija shu yerda chiqadi.';document.getElementById('randomOutput').textContent='Tanlangan variant shu yerda chiqadi.';document.getElementById('copyStatus').textContent='';analyzeText();filterCards();restartQuiz();resetTimer()}
+renderQuiz();analyzeText();
+</script></body></html>
